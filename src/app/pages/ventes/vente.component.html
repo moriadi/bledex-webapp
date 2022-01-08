@@ -1,0 +1,207 @@
+<h2 class="content-block">Ventes</h2>
+
+<div *ngIf="canUpdateVente"  class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-button
+       text="Nouvelle Vente"
+       type="success"
+       stylingMode="outlined"
+       icon="add"
+       (onClick)="openForm(0)"
+       >
+    </dx-button>
+
+    <!-- <dx-button
+       text="Modifier date de vente"
+       type="success"
+       stylingMode="outlined"
+       icon="edit"
+       style="margin-left: 20px"
+       (onClick)="openFormEditDate()"
+       *ngIf="selectedRows.length > 0"
+       >
+    </dx-button> -->
+</div>
+<dx-data-grid #grid
+    class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    [columnHidingEnabled]="true"
+    keyExpr="id"
+    [(selectedRowKeys)]="selectedRows"
+    >
+
+    <dxo-export [enabled]="true"></dxo-export>
+
+    <dxo-selection
+            selectAllMode="allPages"
+            showCheckBoxesMode="always"
+            mode="multiple"
+        ></dxo-selection>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="numero"
+        caption="Numéro"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    <dxi-column
+        dataField="client.raisonSociale"
+        caption="Client"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="dateCreation"
+        caption="Date Création"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        dataType="datetime"
+        format="dd/MM/yyyy"
+        [hidingPriority]="7">
+    </dxi-column>
+
+    <dxi-column
+        dataField="total"
+        caption="Total"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="reduction"
+        caption="Réduction"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="montant"
+        caption="Net à payer"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+   
+    <dxi-column 
+        caption="Est Clôturé"
+        dataField="estLivre"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [allowSorting]="false">
+    </dxi-column>
+
+    <dxi-column 
+        caption=""
+        [allowFiltering]="false"
+        [allowSorting]="false" 
+        cellTemplate="cellTemplate">
+    </dxi-column>
+        
+    <div *dxTemplate="let data of 'cellTemplate'">
+        <dx-button
+               *ngIf="data.data.estModifiable"
+                icon="edit"
+                type="danger"
+                (onClick)="openForm(data.data.id)">
+                <div *dxTemplate="let data of 'content'">
+                    <i class="dx-icon dx-icon-edit"></i> Modifier
+                </div>
+         </dx-button>
+
+        <dx-button
+               style="margin-left: 2px; margin-right: 2px;"
+               *ngIf="data.data.estModifiable"
+                icon="add"
+                type="default"
+                (onClick)="openLigneVenteForm(data.data.id)">
+                <div *dxTemplate="let data of 'content'">
+                    <i class="dx-icon dx-icon-add"></i> Article
+                </div>
+         </dx-button>
+        <dx-button
+               *ngIf="data.data.estModifiable"
+                icon="check"
+                type="success"
+                (onClick)="validerVenteDialog(data.data)">
+                <div *dxTemplate="let data of 'content'">
+                    <dx-load-indicator class='button-indicator'
+                        [visible]="loadIndicatorVisible">
+                    </dx-load-indicator>
+                    <i class="dx-icon dx-icon-check"></i> Valider
+                </div>
+         </dx-button>
+         <i *ngIf="data.data.estLivre" (click)="printInvoice(data.data.id)" class="dx-icon dx-icon-print"></i> <span *ngIf="data.data.estLivre"> Facture </span>
+    </div>
+
+    <div *dxTemplate="let vente of 'detail'">
+         <app-vente-details [vente]="vente.data"></app-vente-details>
+    </div>
+</dx-data-grid>
+
+ <dx-popup
+        [width]="450"
+        [height]="260"
+        [showTitle]="true"
+        title="Formulaire vente"
+        [dragEnabled]="true"
+        [closeOnOutsideClick]="false"
+        [(visible)]="popupVisible">
+        <div *ngIf="popupVisible">
+          <app-vente-form [vente]="currentVente"></app-vente-form>
+        </div>
+</dx-popup>
+
+<dx-popup
+    [width]="700"
+    [height]="280"
+    [showTitle]="true"
+    title="Formulaire nouvel article"
+    [dragEnabled]="true"
+    [closeOnOutsideClick]="false"
+    [(visible)]="showLigneVenteForm">
+    <div *ngIf="showLigneVenteForm">
+        <app-lignevente-form [ligneVente]="currentLigneVente" [vente]="currentVente"></app-lignevente-form>
+    </div>
+</dx-popup>
+
+<dx-popup
+    [width]="600"
+    [height]="250"
+    [showTitle]="true"
+    [title]="confirmMessage"
+    [dragEnabled]="true"
+    [closeOnOutsideClick]="false"
+    [(visible)]="showConfirmVenteDialog">
+    <div *ngIf="showConfirmVenteDialog">
+        <app-vente-confirm></app-vente-confirm>
+    </div>
+</dx-popup>
+
+<dx-popup
+    [width]="400"
+    [height]="250"
+    [showTitle]="true"
+    title="Modifier Date de vente"
+    [dragEnabled]="true"
+    [closeOnOutsideClick]="false"
+    [(visible)]="showFormModifyVenteDate">
+    <div *ngIf="showFormModifyVenteDate">
+        <app-vente-date-form [venteDate]="venteDate"></app-vente-date-form>
+    </div>
+</dx-popup>
+

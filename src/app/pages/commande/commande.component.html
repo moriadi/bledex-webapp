@@ -1,0 +1,113 @@
+<h2 class="content-block">Commandes</h2>
+
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-button
+       text="Nouvelle Commande"
+       type="success"
+       stylingMode="outlined"
+       icon="add"
+       (onClick)="openForm(0)"
+       >
+</dx-button>
+</div>
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    [columnHidingEnabled]="true"
+    keyExpr="id">
+
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="libelle"
+        caption="Libelle"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    <dxi-column
+        dataField="fournisseur.libelle"
+        caption="Fournisseur"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="montant"
+        caption="Montant"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="dateCreation"
+        caption="Date Création"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        dataType="datetime"
+        format="dd/MM/yyyy, HH:mm"
+        [hidingPriority]="7">
+    </dxi-column>
+    
+    <dxi-column 
+        caption="Receptionné"
+        dataField="estValide"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [allowSorting]="false">
+    </dxi-column>
+
+    <dxi-column 
+        caption=""
+        [allowFiltering]="false"
+        [allowSorting]="false" 
+        cellTemplate="cellTemplate">
+    </dxi-column>
+        
+    <div *dxTemplate="let data of 'cellTemplate'">
+        <i *ngIf="!data.data.estValide" (click)="openForm(data.data.id)" class="dx-icon dx-icon-edit"></i> <span *ngIf="!data.data.estValide">Modify </span>
+        <i *ngIf="!data.data.estValide" (click)="openLigneCommandeForm(data.data.id)" class="dx-icon dx-icon-add"></i> <span *ngIf="!data.data.estValide"> New Produit </span>
+    </div>
+
+    <div *dxTemplate="let commande of 'detail'">
+        <app-commande-details [commande]="commande.data"></app-commande-details> 
+    </div>
+</dx-data-grid>
+
+ <dx-popup
+        [width]="700"
+        [height]="330"
+        [showTitle]="true"
+        title="Formulaire Commande"
+        [dragEnabled]="true"
+        [closeOnOutsideClick]="false"
+        [(visible)]="popupVisible">
+        <div *ngIf="popupVisible">
+          <app-commande-form [commande]="currentCommande"></app-commande-form>
+        </div>
+</dx-popup>
+
+<dx-popup
+    [width]="800"
+    [height]="400"
+    [showTitle]="true"
+    title="Ajouter Produit"
+    [dragEnabled]="true"
+    [closeOnOutsideClick]="false"
+    [(visible)]="showLigneCommandeForm">
+    <div *ngIf="showLigneCommandeForm">
+      <app-lignecommande-form [ligneCommande]="currentLigneCommande"></app-lignecommande-form>
+    </div>
+</dx-popup>

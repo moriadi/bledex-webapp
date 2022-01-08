@@ -1,0 +1,38 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #clientForm
+        [formData]="client"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Données Personelles" [colCount]="2">
+            <dxi-item dataField="raisonSociale" [label]="{text: 'Raison Sociale'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="raison Sociale is est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="nomContact">
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item itemType="group" caption="Contact & Adresse" [colCount]="2">
+            <dxi-item dataField="email" [label]="{text: 'Email'}"> </dxi-item>
+
+            <dxi-item dataField="telephone" [label]="{text: 'Téléphone'}" > </dxi-item>
+
+
+            <dxi-item dataField="adresse" [label]="{text: 'Addresse'}">
+            </dxi-item>
+        </dxi-item>
+
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

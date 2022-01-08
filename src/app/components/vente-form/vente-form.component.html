@@ -1,0 +1,33 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #venteForm
+        [formData]="vente"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group"  [colCount]="1">
+            
+            <dxi-item dataField="client.id"
+                editorType="dxSelectBox"
+                [label]="{text: 'Client'}"
+                [editorOptions]="{ dataSource: clients, 
+                                valueExpr:'id',  
+                                displayExpr:'raisonSociale',  
+                                value: vente.client.id,
+                                searchEnabled: true
+                                }">
+                <dxi-validation-rule 
+                    type="required"
+                    message="Le Client est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

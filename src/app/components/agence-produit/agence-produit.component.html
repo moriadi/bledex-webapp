@@ -1,0 +1,23 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-data-grid class="dx-card wide-card"
+        [dataSource]="agenceproduits"
+        [showBorders]="true"
+        [focusedRowEnabled]="true"
+        [focusedRowIndex]="0"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        keyExpr="id">
+
+        <dxi-column
+            dataField="agence.libelle"
+            caption="Agence"
+            [hidingPriority]="8">
+        </dxi-column>
+
+        <dxi-column
+            dataField="quantite"
+            caption="Quantité"
+            [hidingPriority]="6">
+        </dxi-column>
+    </dx-data-grid>
+</div>

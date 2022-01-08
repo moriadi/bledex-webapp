@@ -1,0 +1,47 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form2"
+        #lignetransfertForm
+        [formData]="ligneTransfert"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true">
+        <dxi-item itemType="group" caption="Données de la ligne de transfert" [colCount]="2">
+            
+            <dxi-item dataField="produit.id"
+                editorType="dxSelectBox"
+                [label]="{text: 'Produit'}"
+                [editorOptions]="{ dataSource: produits, 
+                                valueExpr:'id',  
+                                displayExpr:'libelle',  
+                                value: ligneTransfert.produit.id,
+                                searchEnabled: true
+                                }">
+                <dxi-validation-rule 
+                    type="required"
+                    message="Le produit est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="quantite" editorType="dxNumberBox" [label]="{text: 'Quantite'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="La quantite est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item
+            #validatebtn 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>
+<dx-toast [displayTime]="5000" [(visible)]="errorVisible" [type]="type" [message]="errorMessage">
+    <dxo-position
+        my="top"
+        at="top"
+        of="#lignetransfertForm">
+</dxo-position>
+</dx-toast>

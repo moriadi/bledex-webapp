@@ -1,0 +1,89 @@
+<h2 class="content-block">Produits</h2>
+
+<div *ngIf="isManager" class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-button
+       text="Nouveau Produit"
+       type="success"
+       stylingMode="outlined"
+       icon="add"
+       (onClick)="openForm(0)"
+       >
+</dx-button>
+</div>
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    keyExpr="id">
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="code"
+        caption="Code"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    <dxi-column
+        dataField="libelle"
+        caption="Libelle"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    
+    <dxi-column
+        dataField="fournisseur.libelle"
+        caption="Fournisseur"
+        [allowSorting]="false"
+        [hidingPriority]="7">
+    </dxi-column>
+
+    <dxi-column
+        dataField="stockTotal"
+        caption="Stock Total"
+        [hidingPriority]="3">
+    </dxi-column>
+
+    <dxi-column
+    dataField="prixVente"
+    caption="Prix Vente"
+    [hidingPriority]="3">
+   </dxi-column>
+    
+    <dxi-column 
+        dataField="id" 
+        caption=""
+        [allowFiltering]="false"
+        [allowSorting]="false" 
+        cellTemplate="cellTemplate">
+    </dxi-column>
+        
+    <div *dxTemplate="let data of 'cellTemplate'">
+        <i *ngIf="isManager" (click)="openForm(data.value)" class="dx-icon dx-icon-edit"></i> <span *ngIf="isManager">Modify</span>
+    </div>
+
+    <div *dxTemplate="let produit of 'detail'">
+        <app-agence-produit [agenceproduits]="produit.data.agenceProduits"></app-agence-produit> 
+    </div>
+</dx-data-grid>
+
+<dx-popup
+        [width]="800"
+        [height]="520"
+        [showTitle]="true"
+        title="Formulaire Produit"
+        [dragEnabled]="true"
+        [closeOnOutsideClick]="false"
+        [(visible)]="popupVisible">
+        <div>
+          <app-produit-form [produit]="currentProduit"></app-produit-form>
+        </div>
+</dx-popup>

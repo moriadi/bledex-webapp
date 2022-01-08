@@ -1,0 +1,44 @@
+<div class="row" style="margin-left: 20px; margin-right: 200px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #archiveVenteFilterForm
+        [formData]="archiveVenteFilter"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Filtrer ventes" [colCount]="3">
+           
+            <dxi-item dataField="agence.id"
+                editorType="dxSelectBox"
+                [disabled]='disableAgence'
+                [label]="{text: 'Agences'}"
+                [editorOptions]="{ dataSource: agences, 
+                                valueExpr:'id',  
+                                displayExpr:'libelle',  
+                                value: archiveVenteFilter.agence.id
+                                }">
+            </dxi-item>
+
+            <dxi-item dataField="dateDebut" [label]="{text: 'Date'}" editorType="dxDateBox">
+                <dxi-validation-rule 
+                    type="required"
+                    message="La date de début est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="dateFin" [label]="{text: 'Date'}" editorType="dxDateBox">
+                <dxi-validation-rule 
+                    type="required"
+                    message="La date de fin est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

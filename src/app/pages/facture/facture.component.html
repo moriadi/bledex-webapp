@@ -1,0 +1,28 @@
+<div style="margin-top: 20px; font-size: smaller;">
+  <div>{{facture.nomEntreprise}} </div>
+  <div>Tel: {{facture.telephoneEntreprise}} </div>
+  <div>Email: {{facture.emailEntreprise}} </div>
+
+   <div style="margin-left: 180px;">Raison Sociale : {{facture.raisonSocialeClient}} </div>
+   <div style="margin-top: 20px;">Facture N° {{facture.numero}} <span style="margin-left: 320px;"></span>{{facture.dateDuJour}}</div>
+   <table style="margin-top: 20px;" width=500 border=1 cellpadding=20 cellspacing=0>
+    <tr>
+        <th>Designation</th>
+        <th>Quantité</th>
+        <th>Prix Unitaire</th>
+        <th>Prix Total</th>
+    </tr>
+    <tr align=center *ngFor="let ligneVente of facture.produits">
+        <td>{{ligneVente.produit.libelle}}</td>
+        <td>{{ligneVente.quantite}}</td>
+        <td>{{ligneVente.prixUnitaire}}</td>
+        <td>{{ligneVente.montant}}</td>
+    </tr>
+    
+   </table>
+   <div style="margin-top: 20px;">Total: {{facture.montantTotal}}  CFA</div>
+   <div style="margin-top: 10px;">Reduction: {{facture.reduction}}  CFA</div>
+   <div style="margin-top: 10px;">Net à Payer: {{facture.netPayer}}  CFA</div>
+
+   <div style="font-size: smaller; margin-top: 15px;">les marchandises vendues ne peuvent être ni retounées, ni échangées</div>
+</div>

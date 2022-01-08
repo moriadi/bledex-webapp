@@ -1,0 +1,77 @@
+<h2 class="content-block">Clients</h2>
+
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-button
+       text="Nouveau Client"
+       type="success"
+       stylingMode="outlined"
+       icon="add"
+       (onClick)="openForm(0)"
+       >
+</dx-button>
+</div>
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="true"
+    keyExpr="id">
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="raisonSociale"
+        [width]="190"
+        caption="Raison Sociale"
+        [hidingPriority]="8">
+    </dxi-column>
+    <dxi-column
+        dataField="nomContact"
+        caption="Contact"
+        [hidingPriority]="6">
+    </dxi-column>
+    <dxi-column
+        dataField="telephone"
+        caption="Telephone"
+        [allowSorting]="false"
+        [hidingPriority]="7">
+    </dxi-column>
+    <dxi-column
+        dataField="adresse"
+        caption="Addresse"
+        [hidingPriority]="4">
+    </dxi-column>
+
+    <dxi-column 
+        dataField="id" 
+        caption=""
+        [allowFiltering]="false"
+        [allowSorting]="false" 
+        cellTemplate="cellTemplate">
+    </dxi-column>
+        
+    <div *dxTemplate="let data of 'cellTemplate'">
+        <i (click)="openForm(data.value)" class="dx-icon dx-icon-edit"></i> <span>Modify</span>
+    </div>
+</dx-data-grid>
+
+<dx-popup
+        [width]="800"
+        [height]="600"
+        [showTitle]="true"
+        title="Formulaire Client"
+        [dragEnabled]="true"
+        [closeOnOutsideClick]="false"
+        [(visible)]="popupVisible">
+        <div>
+          <app-client-form [client]="currentClient"></app-client-form>
+        </div>
+</dx-popup>
+
+

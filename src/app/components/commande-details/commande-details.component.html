@@ -1,0 +1,69 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="formDetails"
+        [formData]="commande"
+        [readOnly]="true">
+        <dxi-item itemType="group" caption="Données de la commande" [colCount]="2">           
+            <dxi-item dataField="createur.nom" [label]="{text: 'Créateur'}" >
+            </dxi-item>
+
+            <dxi-item dataField="dateCreation" [label]="{text: 'Date Création'}" >
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+
+    <dx-data-grid class="dx-card wide-card"
+        [dataSource]="lignesCommandes"
+        [showBorders]="false"
+        [focusedRowEnabled]="true"
+        [focusedRowIndex]="0"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        keyExpr="id">
+
+        <dxi-column
+            dataField="produit.libelle"
+            caption="Produit"
+            [hidingPriority]="8">
+        </dxi-column>
+
+        <dxi-column
+            dataField="quantite"
+            caption="Quantité"
+            [hidingPriority]="6">
+        </dxi-column>
+
+        <dxi-column
+            dataField="prixUnitaire"
+            caption="Prix Unitaire"
+            [hidingPriority]="6">
+        </dxi-column>
+
+        
+        <dxi-column 
+            dataField="id" 
+            caption=""
+            [allowFiltering]="false"
+            [allowSorting]="false" 
+            cellTemplate="cellTemplate">
+        </dxi-column>
+            
+        <div *dxTemplate="let data of 'cellTemplate'">
+            <i *ngIf="!commande.estValide" (click)="deleteLigneCommande(data.value)" class="dx-icon dx-icon-remove"></i> <span *ngIf="!commande.estValide">Supprimer</span>
+        </div>
+    </dx-data-grid>
+
+    <div *ngIf="!commande.estValide && isManager" style="margin-top: 10px;">
+        <dx-button
+            stylingMode="outlined"
+            text="Valider Réception"
+            type="success"
+            (onClick)="validerReception()">
+            <div *dxTemplate="let data of 'content'">
+                <dx-load-indicator class='button-indicator'
+                    [visible]="loadIndicatorVisible">
+                </dx-load-indicator>
+                <i class="dx-icon dx-icon-check"></i> Valider
+            </div>
+        </dx-button>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row" style="margin-left: 50px; margin-right: 250px;  margin-top: 30px;">
+    <dx-form id="form"
+        #changePasswordForm
+        [formData]="changePassword"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Modifier mon mot de passe" [colCount]="2">
+            <dxi-item dataField="email" [editorOptions]="{ readOnly: true}" [label]="{text: 'Email'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="email est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="password" [editorOptions]="{ mode: 'password' }" [label]="{text: 'Mot de passe'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="mot de passe est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="newPassword" [editorOptions]="{ mode: 'password' }" [label]="{text: 'Nouveau mot de passe'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="nouveau mot de passe est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

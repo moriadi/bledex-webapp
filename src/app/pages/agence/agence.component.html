@@ -1,0 +1,42 @@
+<h2 class="content-block">Agences</h2>
+
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="true"
+    keyExpr="id">
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="code"
+        [width]="190"
+        caption="Code"
+        [hidingPriority]="8">
+    </dxi-column>
+    <dxi-column
+        dataField="libelle"
+        caption="Libelle"
+        [hidingPriority]="6">
+    </dxi-column>
+    <dxi-column
+        dataField="telephone"
+        caption="Telephone"
+        [allowSorting]="false"
+        [hidingPriority]="7">
+    </dxi-column>
+    <dxi-column
+        dataField="adresse"
+        caption="Addresse"
+        [hidingPriority]="4">
+    </dxi-column>        
+</dx-data-grid>
+
+

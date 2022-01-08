@@ -1,0 +1,29 @@
+<div style="margin-top: 30px; margin-left: 20px; margin-right: 20px;">
+            
+        <dx-tab-panel
+        [dataSource]="typesEtats"
+        [selectedIndex]="0"
+        [loop]="true"
+        [animationEnabled]="true"
+        [swipeEnabled]="true"
+        >
+        <div *dxTemplate="let typeEtat of 'title'">
+            <span>{{typeEtat.libelle}}</span>
+        </div>
+        <div *dxTemplate="let typeEtat of 'item'">
+            <div class="tabpanel-item">
+                <div *ngIf="typeEtat.code == 'VENTES_MENSUELLES'">
+                    <app-ventes-mensuelles></app-ventes-mensuelles>
+                </div>
+
+                <div *ngIf="typeEtat.code == 'VENTES_QUOTIDIENNES'">
+                    <app-ventes-quotidiennes></app-ventes-quotidiennes>
+                </div>
+
+                <div *ngIf="typeEtat.code == 'VENTES_PRODUITS'">
+                    <app-vente-produits></app-vente-produits>
+                </div>
+            </div>
+        </div>
+        </dx-tab-panel>
+</div>

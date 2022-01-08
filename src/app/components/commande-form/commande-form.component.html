@@ -1,0 +1,39 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #commandeForm
+        [formData]="commande"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Données de la commande" [colCount]="2">
+            
+            <dxi-item dataField="libelle" [label]="{text: 'Libelle'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="Libelle est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="fournisseur.id"
+                editorType="dxSelectBox"
+                [label]="{text: 'Fournisseur'}"
+                [editorOptions]="{ dataSource: fournisseurs, 
+                                valueExpr:'id',  
+                                displayExpr:'libelle',  
+                                value: commande.fournisseur.id
+                                }">
+                <dxi-validation-rule 
+                    type="required"
+                    message="Le quartier est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

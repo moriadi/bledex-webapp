@@ -1,0 +1,59 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="formDetails"
+        [formData]="vente"
+        [readOnly]="true">
+        <dxi-item itemType="group" caption="Données de la vente" [colCount]="2">                      
+            <dxi-item dataField="createur.nom" [label]="{text: 'Créateur'}" >
+            </dxi-item>
+            <dxi-item dataField="dateCreation" [label]="{text: 'Date Création'}" >
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+
+    <dx-data-grid class="dx-card wide-card"
+        [dataSource]="lignesVentes"
+        [showBorders]="false"
+        [focusedRowEnabled]="true"
+        [focusedRowIndex]="0"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        keyExpr="id">
+
+        <dxi-column
+            dataField="produit.libelle"
+            caption="Produit"
+            [hidingPriority]="8">
+        </dxi-column>
+
+        <dxi-column
+            dataField="quantite"
+            caption="Quantité"
+            [hidingPriority]="6">
+        </dxi-column>
+
+        <dxi-column
+            dataField="prixUnitaire"
+            caption="Prix Unitaire"
+            [hidingPriority]="6">
+        </dxi-column>
+
+        <dxi-column
+            dataField="montant"
+            caption="Montant"
+            [hidingPriority]="6">
+        </dxi-column>
+
+        
+        <dxi-column 
+            dataField="id" 
+            caption=""
+            [allowFiltering]="false"
+            [allowSorting]="false" 
+            cellTemplate="cellTemplate">
+        </dxi-column>
+            
+        <div *dxTemplate="let data of 'cellTemplate'">
+            <i *ngIf="!vente.estLivre" (click)="deleteLigneVente(data.value)" class="dx-icon dx-icon-remove"></i> <span *ngIf="!vente.estLivre">Supprimer</span>
+        </div>
+    </dx-data-grid>
+</div>

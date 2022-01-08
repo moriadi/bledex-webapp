@@ -1,0 +1,83 @@
+<h2 class="content-block">Etats Vente Produits </h2>
+
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+
+</div>
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    [columnHidingEnabled]="true"
+    keyExpr="mois">
+
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+            dataField="mois"
+            caption="Mois"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            [hidingPriority]="1">
+    </dxi-column>
+
+    <div *dxTemplate="let venteMensuelle of 'detail'">
+        <div style="margin-top: 10px;">
+            <dx-data-grid class="dx-card wide-card"
+                    [dataSource]="venteMensuelle.data.produits"
+                    [showBorders]="false"
+                    [focusedRowEnabled]="true"
+                    [focusedRowIndex]="0"
+                    [columnAutoWidth]="true"
+                    [columnHidingEnabled]="true"
+                    keyExpr="produit">
+                
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+                    <dxo-filter-row [visible]="true"></dxo-filter-row>
+                    <dxo-header-filter [visible]="true"></dxo-header-filter>
+                    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+                
+                    <dxi-column
+                        dataField="produit"
+                        caption="Produit"
+                        [allowFiltering]="true"
+                        [allowSorting]="true"
+                        [hidingPriority]="8">
+                    </dxi-column>
+
+                    <dxi-column
+                        dataField="quantite"
+                        caption="Quantité"
+                        [allowFiltering]="true"
+                        [allowSorting]="true"
+                        [hidingPriority]="8">
+                    </dxi-column>
+                                
+                    <dxi-column
+                        dataField="chiffreAffaire"
+                        caption="chiffre Affaire"
+                        [allowFiltering]="true"
+                        [allowSorting]="true"
+                        [hidingPriority]="6">
+                    </dxi-column>
+                
+                    <dxi-column
+                        dataField="marge"
+                        caption="Marge"
+                        [allowFiltering]="true"
+                        [allowSorting]="true"
+                        [hidingPriority]="7">
+                    </dxi-column>
+                
+            </dx-data-grid>
+        </div>
+    </div>
+</dx-data-grid>

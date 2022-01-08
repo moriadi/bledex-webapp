@@ -1,0 +1,93 @@
+<h2 class="content-block">Ventes Quotidennes</h2>
+
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+
+</div>
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    [columnHidingEnabled]="true"
+    keyExpr="jour">
+
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+            dataField="jour"
+            caption="Date"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            dataType="datetime"
+            format="dd/MM/yyyy"
+            [hidingPriority]="1">
+    </dxi-column>
+
+    <dxi-column
+        dataField="chiffreAffaire"
+        caption="Chiffre Affaire"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="2">
+    </dxi-column>
+
+    <dxi-column
+        dataField="marge"
+        caption="Marge"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="3">
+    </dxi-column>
+
+    <div *dxTemplate="let ventejournaliere of 'detail'">
+        <div style="margin-top: 10px;">
+            <dx-data-grid class="dx-card wide-card"
+                    [dataSource]="ventejournaliere.data.details"
+                    [showBorders]="false"
+                    [focusedRowEnabled]="true"
+                    [focusedRowIndex]="0"
+                    [columnAutoWidth]="true"
+                    [columnHidingEnabled]="true"
+                    keyExpr="agence">
+                
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+                    <dxo-filter-row [visible]="true"></dxo-filter-row>
+                    <dxo-header-filter [visible]="true"></dxo-header-filter>
+                    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+                
+                    <dxi-column
+                        dataField="agence"
+                        caption="Agence"
+                        [allowFiltering]="true"
+                        [allowSorting]="true"
+                        [hidingPriority]="8">
+                    </dxi-column>
+                                
+                    <dxi-column
+                        dataField="chiffreAffaire"
+                        caption="chiffre Affaire"
+                        [allowFiltering]="true"
+                        [allowSorting]="true"
+                        [hidingPriority]="6">
+                    </dxi-column>
+                
+                    <dxi-column
+                        dataField="marge"
+                        caption="Agence"
+                        [allowFiltering]="true"
+                        [allowSorting]="true"
+                        [hidingPriority]="7">
+                    </dxi-column>
+                
+                </dx-data-grid>
+        </div>
+    </div>
+</dx-data-grid>

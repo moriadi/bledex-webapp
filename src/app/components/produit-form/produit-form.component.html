@@ -1,0 +1,61 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #produitForm
+        [formData]="produit"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Données" [colCount]="2">
+            <dxi-item dataField="code" [label]="{text: 'Code'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="Libelle est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="libelle" [label]="{text: 'Libelle'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="Libelle est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="fournisseur.id"
+                editorType="dxSelectBox"
+                [label]="{text: 'Fournisseur'}"
+                [editorOptions]="{ dataSource: fournisseurs, 
+                                valueExpr:'id',  
+                                displayExpr:'libelle',  
+                                value: produit.fournisseur.id
+                                }">
+                <dxi-validation-rule 
+                    type="required"
+                    message="Le quartier est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+
+            <dxi-item editorType="dxNumberBox"  dataField="prixVente" [label]="{text: 'Prix Vente'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="Prix vente obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item editorType="dxNumberBox"  dataField="cotealerte" [label]="{text: 'Côte alerte'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="Cote alerte obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left" 
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

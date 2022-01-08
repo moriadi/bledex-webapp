@@ -1,0 +1,168 @@
+<h2 class="content-block">Charges</h2>
+
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-button
+       text="Nouvelle Charge"
+       type="success"
+       stylingMode="outlined"
+       icon="add"
+       (onClick)="openForm(0)"
+       >
+</dx-button>
+</div>
+
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detailmois' }"
+    [columnHidingEnabled]="true"
+    keyExpr="mois">
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+            dataField="mois"
+            caption="Mois"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            [hidingPriority]="1">
+    </dxi-column>
+
+    <dxi-column
+            dataField="montant"
+            caption="Montant"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            [hidingPriority]="2">
+    </dxi-column>
+    
+    <div *dxTemplate="let chargemensuelle of 'detailmois'">
+        <dx-data-grid class="dx-card wide-card"
+            [dataSource]="chargemensuelle.data.chargesAgences"
+            [showBorders]="false"
+            [focusedRowEnabled]="true"
+            [focusedRowIndex]="0"
+            [columnAutoWidth]="true"
+            [masterDetail]="{ enabled: true, template: 'detailagences' }"
+            [columnHidingEnabled]="true"
+            keyExpr="agence">
+    
+            <dxo-paging [pageSize]="10"></dxo-paging>
+           
+            <dxi-column
+                    dataField="agence"
+                    caption="Agence"
+                    [allowFiltering]="true"
+                    [allowSorting]="true"
+                    [hidingPriority]="1">
+            </dxi-column>
+
+            <dxi-column
+                    dataField="montant"
+                    caption="Montant"
+                    [allowFiltering]="true"
+                    [allowSorting]="true"
+                    [hidingPriority]="2">
+            </dxi-column>
+
+            <div *dxTemplate="let chargeagence of 'detailagences'">
+                <div *ngIf="!chargeagence.data.estCloture" style="margin-top: 2px;">
+                    <dx-button
+                        icon="check"
+                        type="success"
+                        (onClick)="clotureCharges(chargeagence.data)">
+                        <div *dxTemplate="let data of 'content'">
+                            <dx-load-indicator class='button-indicator'
+                                [visible]="loadIndicatorVisible">
+                            </dx-load-indicator>
+                            <i class="dx-icon dx-icon-check"></i> Cloturer Charges Agence
+                        </div>
+                    </dx-button>
+                </div>
+        
+                <div style="margin-top: 10px;">
+                    <dx-data-grid class="dx-card wide-card"
+                            [dataSource]="chargeagence.data.details"
+                            [showBorders]="false"
+                            [focusedRowEnabled]="true"
+                            [focusedRowIndex]="0"
+                            [columnAutoWidth]="true"
+                            [columnHidingEnabled]="true" 
+                            keyExpr="id">
+                        
+                            <dxo-paging [pageSize]="10"></dxo-paging>
+                            <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+                            <dxo-filter-row [visible]="true"></dxo-filter-row>
+                            <dxo-header-filter [visible]="true"></dxo-header-filter>
+                            <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+                        
+                            <dxi-column
+                                dataField="date"
+                                caption="Date"
+                                [allowFiltering]="true"
+                                [allowSorting]="true"
+                                dataType="datetime"
+                                format="dd/MM/yyyy"
+                                [hidingPriority]="7">
+                            </dxi-column>
+        
+                            <dxi-column
+                                dataField="montant"
+                                caption="Montant"
+                                [allowFiltering]="true"
+                                [allowSorting]="true"
+                                [hidingPriority]="6">
+                            </dxi-column>
+                        
+                            <dxi-column
+                                dataField="typecharge.libelle"
+                                caption="Type Charge"
+                                [allowFiltering]="true"
+                                [allowSorting]="true"
+                                [hidingPriority]="8">
+                            </dxi-column>
+                        
+                            <dxi-column
+                                dataField="remarques"
+                                caption="Remarques"
+                                [allowFiltering]="true"
+                                [allowSorting]="true"
+                                [hidingPriority]="6">
+                            </dxi-column>
+        
+                            <dxi-column 
+                                caption=""
+                                [allowFiltering]="false"
+                                [allowSorting]="false" 
+                                cellTemplate="actionsTemplate">
+                            </dxi-column>
+                            
+                            <div *dxTemplate="let data of 'actionsTemplate'">
+                                <i *ngIf="!data.data.estCloture" (click)="openForm(data.data.id)" class="dx-icon dx-icon-edit"></i> <span *ngIf="!data.data.estCloture"> Modify </span>
+                            </div>
+                    </dx-data-grid>
+                </div>
+            </div>
+        </dx-data-grid>
+    </div>    
+</dx-data-grid>
+
+ <dx-popup
+        [width]="800"
+        [height]="450"
+        [showTitle]="true"
+        title="Charge Form"
+        [dragEnabled]="true"
+        [closeOnOutsideClick]="false"
+        [(visible)]="popupVisible">
+        <div *ngIf="popupVisible">
+          <app-charge-form [charge]="currentCharge"></app-charge-form>
+        </div>
+</dx-popup>

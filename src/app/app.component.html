@@ -1,0 +1,19 @@
+<ng-container *ngIf="isAutorized(); else notAuthorized">
+    <app-side-nav-outer-toolbar title="{{appInfo.title}}">
+        <router-outlet></router-outlet>
+        <app-footer>
+            Copyright © 2022 Bledex.
+            <br/>
+            MS Investment Company.
+        </app-footer>
+    </app-side-nav-outer-toolbar>
+</ng-container>
+
+<ng-template #notAuthorized>
+    <app-single-card *ngIf="!is_invoice">
+        <router-outlet></router-outlet>
+    </app-single-card>
+    <div *ngIf="is_invoice">
+        <router-outlet></router-outlet>
+    </div>
+</ng-template>

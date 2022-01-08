@@ -1,0 +1,31 @@
+<dx-responsive-box>
+    <dxi-row [ratio]="1"></dxi-row>
+    <dxi-col [ratio]="0.5" screen="md lg"></dxi-col>
+    <dxi-col [ratio]="2"></dxi-col>
+    <dxi-col [ratio]="0.5" screen="md lg"></dxi-col>
+  
+    <dxi-item class="left-side-bar">
+        <dxi-location screen="md lg" [row]="0" [col]="0"></dxi-location>
+        <p>
+            <dx-button
+                icon="check"
+                type="success"
+                text="Oui"
+                (onClick)="ouiClick()">
+            </dx-button>
+        </p>
+    </dxi-item>
+ 
+    <dxi-item class="right-side-bar">
+        <dxi-location screen="md lg" [row]="0" [col]="2"></dxi-location>
+        <p>
+            <dx-button
+                icon="close"
+                type="danger"
+                text="Non"
+                (onClick)="nonClick()">
+            </dx-button>
+        </p>
+    </dxi-item>
+ 
+</dx-responsive-box>

@@ -1,0 +1,96 @@
+<h2 class="content-block">Ventes Mensuelles</h2>
+
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+
+</div>
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    [columnHidingEnabled]="true"
+    keyExpr="mois">
+
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="mois"
+        caption="Mois"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    <dxi-column
+        dataField="chiffreAffaire"
+        caption="Chiffre Affaire"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+ 
+    <dxi-column
+        caption="Marge"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        cellTemplate="margeCellTemplate"
+        >
+    </dxi-column>
+
+    <div *dxTemplate="let margedata of 'margeCellTemplate'">
+        <span>{{margedata.data.marge}}</span>
+        <!--<span *ngIf="!margedata.data.moisCourant">{{margedata.data.marge}}</span>
+         <div *ngIf="margedata.data.moisCourant">
+            <p>
+                <a id="link1"
+                    (mouseenter)="toggleDefault()"
+                    (mouseleave)="toggleDefault()">{{margedata.data.marge}}</a>
+            </p>
+            <dx-popover
+                target="#link1" 
+                position="top"
+                [width]="600"
+                [(visible)]="defaultVisible">
+                <div *dxTemplate="let data = model of 'content'">
+                    <dx-data-grid class="dx-card wide-card"
+                            [dataSource]="dernieresVentes"
+                            [showBorders]="false"
+                            [focusedRowEnabled]="true"
+                            [focusedRowIndex]="0"
+                            [columnAutoWidth]="true"
+                            [columnHidingEnabled]="true"
+                            keyExpr="mois">
+
+                            <dxi-column
+                                dataField="mois"
+                                caption="Agence">
+                            </dxi-column>
+
+                            <dxi-column
+                                dataField="chiffreAffaire"
+                                caption="Chiffre Affaire">
+                            </dxi-column>
+
+                            <dxi-column
+                                dataField="marge"
+                                caption="Marge"
+                                >
+                            </dxi-column>
+                                
+                        </dx-data-grid>
+                </div>
+            </dx-popover>
+        </div> -->
+    </div>
+
+    <div *dxTemplate="let ventemensuelle of 'detail'">
+        <app-ventemensuelle-details [venteMensuelle]="ventemensuelle.data"></app-ventemensuelle-details>
+    </div>
+</dx-data-grid>

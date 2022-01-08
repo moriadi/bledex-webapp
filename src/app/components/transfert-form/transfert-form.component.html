@@ -1,0 +1,46 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #transfertForm
+        [formData]="transfert"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Données du transfert" [colCount]="2">
+            
+            <dxi-item dataField="agenceSource.id"
+                editorType="dxSelectBox"
+                [label]="{text: 'Agence Source'}"
+                [editorOptions]="{ dataSource: agences, 
+                                valueExpr:'id',  
+                                displayExpr:'libelle',  
+                                value: transfert.agenceSource.id
+                                }">
+                <dxi-validation-rule 
+                    type="required"
+                    message="L'agence source est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="agenceCible.id"
+                editorType="dxSelectBox"
+                [label]="{text: 'Agence Cible'}"
+                [editorOptions]="{ dataSource: agences, 
+                                valueExpr:'id',  
+                                displayExpr:'libelle',  
+                                value: transfert.agenceCible.id
+                                }">
+                <dxi-validation-rule 
+                    type="required"
+                    message="L'agence source est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

@@ -1,0 +1,82 @@
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    [columnHidingEnabled]="true"
+    keyExpr="id">
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="client.raisonSociale"
+        caption="Client"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    
+    <dxi-column
+        dataField="total"
+        caption="Total"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="reduction"
+        caption="Réduction"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="montant"
+        caption="Net à payer"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="dateCreation"
+        caption="Date Création"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        dataType="datetime"
+        format="dd/MM/yyyy"
+        [hidingPriority]="7">
+    </dxi-column>
+   
+    <dxi-column 
+        caption="Livré"
+        dataField="estLivre"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [allowSorting]="false">
+    </dxi-column>
+
+    <dxi-column 
+        caption=""
+        [allowFiltering]="false"
+        [allowSorting]="false" 
+        cellTemplate="cellTemplate">
+    </dxi-column>
+
+    <div *dxTemplate="let data of 'cellTemplate'">
+         <i *ngIf="data.data.estLivre" (click)="printInvoice(data.data.id)" class="dx-icon dx-icon-print"></i> <span *ngIf="data.data.estLivre"> Facture </span>
+    </div>
+
+    <div *dxTemplate="let vente of 'detail'">
+         <app-vente-details [vente]="vente.data"></app-vente-details>
+    </div>
+</dx-data-grid>

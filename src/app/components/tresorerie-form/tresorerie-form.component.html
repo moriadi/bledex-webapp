@@ -1,0 +1,42 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #tresorerieForm
+        [formData]="tresorerie"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Données de la trésorerie" [colCount]="2">
+            
+            <dxi-item dataField="libelle" [label]="{text: 'Libelle'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="Le libelle est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="date" [label]="{text: 'Date'}" editorType="dxDateBox">
+                <dxi-validation-rule 
+                    type="required"
+                    message="La date est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="montant" [label]="{text: 'Montant'}" editorType="dxNumberBox">
+                <dxi-validation-rule 
+                    type="required"
+                    message="Le montant est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item editorType="dxCheckBox" dataField="estInvestissement" [label]="{text: 'Investissement ?'}" >
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

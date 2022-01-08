@@ -1,0 +1,63 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="formDetails"
+        [formData]="transfert"
+        [readOnly]="true">
+        <dxi-item itemType="group" caption="Données du transfert" [colCount]="2">           
+            <dxi-item dataField="gestionnaire.nom" [label]="{text: 'Créateur'}" >
+            </dxi-item>
+
+            <dxi-item dataField="date" [label]="{text: 'Date Création'}" >
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+
+    <dx-data-grid class="dx-card wide-card"
+        [dataSource]="transfert.produits"
+        [showBorders]="false"
+        [focusedRowEnabled]="true"
+        [focusedRowIndex]="0"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        keyExpr="id">
+
+        <dxi-column
+            dataField="produit.libelle"
+            caption="Produit"
+            [hidingPriority]="8">
+        </dxi-column>
+
+        <dxi-column
+            dataField="quantite"
+            caption="Quantité"
+            [hidingPriority]="6">
+        </dxi-column>
+
+        <dxi-column 
+            dataField="id" 
+            caption=""
+            [allowFiltering]="false"
+            [allowSorting]="false" 
+            cellTemplate="cellTemplate">
+        </dxi-column>
+            
+        <div *dxTemplate="let data of 'cellTemplate'">
+            <i *ngIf="!transfert.estValide" (click)="deleteLigneTransfert(data.value)" class="dx-icon dx-icon-remove"></i> <span *ngIf="!transfert.estValide">Supprimer</span>
+        </div>
+
+    </dx-data-grid>
+
+    <div *ngIf="isManager && !transfert.estValide && transfert.produits.length > 0" style="margin-top: 10px;">
+        <dx-button
+            stylingMode="outlined"
+            text="Valider Réception"
+            type="success"
+            (onClick)="validerReception()">
+            <div *dxTemplate="let data of 'content'">
+                <dx-load-indicator class='button-indicator'
+                    [visible]="loadIndicatorVisible">
+                </dx-load-indicator>
+                <i class="dx-icon dx-icon-check"></i> Valider
+            </div>
+        </dx-button>
+    </div>
+</div>

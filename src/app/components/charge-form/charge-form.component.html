@@ -1,0 +1,49 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #chargeForm
+        [formData]="charge"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Données de la charge" [colCount]="2">
+            
+            <dxi-item dataField="date" [label]="{text: 'Date'}" editorType="dxDateBox">
+                <dxi-validation-rule 
+                    type="required"
+                    message="La date est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="typeCharge.id"
+                editorType="dxSelectBox"
+                [label]="{text: 'Type Charge'}"
+                [editorOptions]="{ dataSource: typecharges, 
+                                valueExpr:'id',  
+                                displayExpr:'libelle',  
+                                value: charge.typeCharge.id
+                                }">
+                <dxi-validation-rule 
+                    type="required"
+                    message="Le type de charge est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="montant" [label]="{text: 'Montant'}" editorType="dxNumberBox">
+                <dxi-validation-rule 
+                    type="required"
+                    message="Le montant est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="remarques" [label]="{text: 'Remarques'}" >
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

@@ -1,0 +1,42 @@
+<dx-responsive-box>
+    <dxi-row></dxi-row>
+    <dxi-row></dxi-row>
+    
+    <dxi-col></dxi-col>
+    <dxi-col></dxi-col>
+  
+    <dxi-item>
+        <dxi-location [row]="0" [col]="0"></dxi-location>
+        Appliquer Réduction ? <dx-check-box [(value)]="hasReduction"></dx-check-box>
+    </dxi-item>
+
+    <dxi-item>
+        <dxi-location [row]="0" [col]="1"></dxi-location>
+        Montant Réduction <dx-number-box [(value)]="amount" [disabled] = "!hasReduction"></dx-number-box>
+    </dxi-item>
+
+    <dxi-item class="left-side-bar" style="margin-top: 20px;">
+        <dxi-location [row]="1" [col]="0"></dxi-location>
+        <p>
+            <dx-button
+                icon="check"
+                type="success"
+                text="Oui"
+                (onClick)="ouiClick()">
+            </dx-button>
+        </p>
+    </dxi-item>
+ 
+    <dxi-item class="right-side-bar" style="margin-left: 70%; margin-top: 20px;">
+        <dxi-location [row]="1" [col]="1"></dxi-location>
+        <p>
+            <dx-button
+                icon="close"
+                type="danger"
+                text="Non"
+                (onClick)="nonClick()">
+            </dx-button>
+        </p>
+    </dxi-item>
+ 
+</dx-responsive-box>

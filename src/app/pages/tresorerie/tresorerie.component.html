@@ -1,0 +1,95 @@
+<h2 class="content-block">Mouvements Tresorerie</h2>
+
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-button
+       text="Ajouter"
+       type="success"
+       stylingMode="outlined"
+       icon="add"
+       (onClick)="openForm(0)"
+       >
+</dx-button>
+</div>
+
+<dx-data-grid class="dx-card wide-card"
+        [dataSource]="dataSource"
+        [showBorders]="false"
+        [focusedRowEnabled]="true"
+        [focusedRowIndex]="0"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        keyExpr="id">
+    
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+    
+        <dxi-column
+            dataField="libelle"
+            caption="Type Charge"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            [hidingPriority]="8">
+        </dxi-column>
+
+        <dxi-column
+            dataField="nature"
+            caption="Nature Mouvement"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            [hidingPriority]="8">
+        </dxi-column>
+
+        <dxi-column
+            dataField="date"
+            caption="Date"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            dataType="datetime"
+            format="dd/MM/yyyy"
+            [hidingPriority]="7">
+        </dxi-column>
+
+        <dxi-column
+            dataField="montant"
+            caption="Montant"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            [hidingPriority]="6">
+        </dxi-column>
+    
+        <dxi-column
+            dataField="solde"
+            caption="Solde"
+            [allowFiltering]="true"
+            [allowSorting]="true"
+            [hidingPriority]="6">
+        </dxi-column>
+
+        <dxi-column 
+            caption=""
+            [allowFiltering]="false"
+            [allowSorting]="false" 
+            [width]="150"
+            cellTemplate="actionsTemplate">
+        </dxi-column>
+        
+        <div *dxTemplate="let data of 'actionsTemplate'">
+            <i (click)="openForm(data.data.id)" class="dx-icon dx-icon-edit"></i> <span>Modify </span>
+        </div>
+</dx-data-grid>
+
+ <dx-popup
+        [width]="800"
+        [height]="450"
+        [showTitle]="true"
+        title="Tresorerie Form"
+        [dragEnabled]="true"
+        [closeOnOutsideClick]="false"
+        [(visible)]="popupVisible">
+        <div *ngIf="popupVisible">
+          <app-tresorerie-form [tresorerie]="currentTresorerie"></app-tresorerie-form>
+        </div>
+</dx-popup>

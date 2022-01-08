@@ -1,0 +1,85 @@
+<h2 class="content-block">Fournisseurs</h2>
+
+<div *ngIf="isManager" class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-button
+       text="Nouveau Fournisseur"
+       type="success"
+       stylingMode="outlined"
+       icon="add"
+       (onClick)="openForm(0)"
+       >
+</dx-button>
+</div>
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="true"
+    keyExpr="id">
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="libelle"
+        [width]="190"
+        caption="Libelle"
+        [hidingPriority]="8">
+    </dxi-column>
+    <dxi-column
+        dataField="adresse"
+        caption="Adresse"
+        [hidingPriority]="6">
+    </dxi-column>
+
+    <dxi-column
+        dataField="contact"
+        caption="Contact"
+        [allowSorting]="false"
+        [hidingPriority]="7">
+    </dxi-column>
+
+    <dxi-column
+        dataField="telephone"
+        caption="Telephone"
+        [allowSorting]="false"
+        [hidingPriority]="7">
+    </dxi-column>
+
+    <dxi-column
+        dataField="email"
+        caption="Email"
+        [hidingPriority]="3">
+    </dxi-column>
+    
+    <dxi-column 
+        dataField="id" 
+        [width]="100" 
+        caption=""
+        [allowFiltering]="false"
+        [allowSorting]="false" 
+        cellTemplate="cellTemplate">
+    </dxi-column>
+        
+    <div *dxTemplate="let data of 'cellTemplate'">
+        <i *ngIf="isManager"  (click)="openForm(data.value)" class="dx-icon dx-icon-edit"></i> <span *ngIf="isManager">Modify</span>
+    </div>
+</dx-data-grid>
+
+<dx-popup
+        [width]="800"
+        [height]="560"
+        [showTitle]="true"
+        title="Formulaire Fournisseur"
+        [dragEnabled]="true"
+        [closeOnOutsideClick]="false"
+        [(visible)]="popupVisible">
+        <div>
+          <app-fournisseur-form [fournisseur]="currentFournisseur"></app-fournisseur-form>
+        </div>
+    </dx-popup>

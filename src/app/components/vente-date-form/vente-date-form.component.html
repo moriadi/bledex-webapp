@@ -1,0 +1,24 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #venteDateForm
+        [formData]="venteDate"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="" [colCount]="1">
+            <dxi-item dataField="selectedDate" [label]="{text: 'Date'}" editorType="dxDateBox">
+                <dxi-validation-rule 
+                    type="required"
+                    message="La date est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

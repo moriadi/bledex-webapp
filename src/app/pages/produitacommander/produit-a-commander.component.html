@@ -1,0 +1,50 @@
+<h2 class="content-block" style="margin-left: 5px; margin-bottom: 10px;">Produits à commander</h2>
+
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="true"
+    keyExpr="id">
+    
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="code"
+        caption="Code"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    <dxi-column
+        dataField="libelle"
+        caption="Libelle"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    
+    <dxi-column
+        dataField="fournisseur.libelle"
+        caption="Fournisseur"
+        [allowSorting]="false"
+        [hidingPriority]="7">
+    </dxi-column>
+
+    <dxi-column
+        dataField="stockTotal"
+        caption="Stock"
+        [hidingPriority]="3">
+    </dxi-column>
+
+    <dxi-column
+        dataField="cotealerte"
+        caption="Côte Alerte"
+        [hidingPriority]="3">
+    </dxi-column>
+</dx-data-grid>

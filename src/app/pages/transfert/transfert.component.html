@@ -1,0 +1,107 @@
+<h2 class="content-block">Transferts de produits</h2>
+
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-button
+       text="Nouveau Transfert"
+       type="success"
+       stylingMode="outlined"
+       icon="add"
+       (onClick)="openForm(0)"
+       >
+</dx-button>
+</div>
+<dx-data-grid class="dx-card wide-card"
+    [dataSource]="dataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [focusedRowIndex]="0"
+    [columnAutoWidth]="true"
+    [masterDetail]="{ enabled: true, template: 'detail' }"
+    [columnHidingEnabled]="true"
+    keyExpr="id">
+
+    <dxo-export [enabled]="true"></dxo-export>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [width]="240" [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+
+    <dxi-column
+        dataField="date"
+        caption="Date Création"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        dataType="datetime"
+        format="dd/MM/yyyy, HH:mm"
+        [hidingPriority]="7">
+    </dxi-column>
+    
+
+    <dxi-column
+        dataField="agenceSource.libelle"
+        caption="Agence Source"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    <dxi-column
+        dataField="agenceCible.libelle"
+        caption="Agence Cible"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [hidingPriority]="8">
+    </dxi-column>
+
+    <dxi-column 
+        caption="Validé"
+        dataField="estValide"
+        [allowFiltering]="true"
+        [allowSorting]="true"
+        [allowSorting]="false">
+    </dxi-column>
+
+    <dxi-column 
+        caption=""
+        [allowFiltering]="false"
+        [allowSorting]="false" 
+        cellTemplate="cellTemplate">
+    </dxi-column>
+        
+    <div *dxTemplate="let transfert of 'cellTemplate'">
+        <i *ngIf="!transfert.data.estValide" (click)="openForm(transfert.data.id)" class="dx-icon dx-icon-edit"></i> <span *ngIf="!transfert.data.estValide">Modify </span>
+        <i *ngIf="!transfert.data.estValide" (click)="openLigneTransfertForm(transfert.data)" class="dx-icon dx-icon-add"></i> <span *ngIf="!transfert.data.estValide"> New Produit </span>
+    </div>
+
+    <div *dxTemplate="let transfert of 'detail'">
+        <app-transfert-details [transfert]="transfert.data"></app-transfert-details> 
+    </div>
+</dx-data-grid>
+
+ <dx-popup
+        [width]="700"
+        [height]="330"
+        [showTitle]="true"
+        title="Formulaire Transfert"
+        [dragEnabled]="true"
+        [closeOnOutsideClick]="false"
+        [(visible)]="popupVisible">
+        <div *ngIf="popupVisible">
+          <app-transfert-form [transfert]="currentTransfert"></app-transfert-form>
+        </div>
+</dx-popup>
+
+
+<dx-popup
+    [width]="650"
+    [height]="330"
+    [showTitle]="true"
+    title="Ajouter Produit"
+    [dragEnabled]="true"
+    [closeOnOutsideClick]="false"
+    [(visible)]="showLigneTransfertForm">
+    <div *ngIf="showLigneTransfertForm">
+      <app-lignetransfert-form [ligneTransfert]="currentLigneTransfert"></app-lignetransfert-form>
+    </div>
+</dx-popup>

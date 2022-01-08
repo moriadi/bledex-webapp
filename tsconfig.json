@@ -1,0 +1,33 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es5",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "jszip": [
+        "node_modules/jszip/dist/jszip.min.js"
+      ],
+      "exceljs": [
+        "node_modules/exceljs/dist/exceljs.min.js"
+      ],
+      "@app/*": ["src/app/*"],
+      "@environments/*": ["src/environments/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

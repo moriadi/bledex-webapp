@@ -1,0 +1,40 @@
+<div class="row" style="margin-left: 5px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #fournisseurForm
+        [formData]="fournisseur"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="Données Personelles" [colCount]="2">
+            <dxi-item dataField="libelle" [label]="{text: 'Libelle'}" >
+                <dxi-validation-rule 
+                    type="required"
+                    message="Libelle est obligatoire">
+                </dxi-validation-rule>
+            </dxi-item>
+
+            <dxi-item dataField="contact" [label]="{text: 'Contact'}">
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item itemType="group" caption="Contact & Adresse" [colCount]="2">
+            
+            <dxi-item dataField="email">
+            </dxi-item>
+
+            <dxi-item dataField="telephone" [label]="{text: 'Téléphone'}" >
+            </dxi-item>
+
+            <dxi-item dataField="adresse" [label]="{text: 'Adresse'}" >
+            </dxi-item>
+  
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>
