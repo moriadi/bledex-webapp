@@ -23,10 +23,13 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'abonnement-base(dc23999e-4ba1-4964-bd8c-ee9495c987d1)'
     appType: 'webAppLinux'
+    DeploymentType: webDeploy
+    azureSubscription: 'abonnement-base(dc23999e-4ba1-4964-bd8c-ee9495c987d1)'
     WebAppName: 'apolo-web-dev'
-    deployToSlotOrASE: true
-    SlotName: 'production'
+    #deployToSlotOrASE: true
+    ResourceGroupName: 'rg-bledex-dev'
+    #SlotName: 'production'
     packageForLinux: ./dist/ms-retail
+    enableCustomDeployment: true
     StartupCommand: 'pm2 serve /home/site/wwwroot --no-daemon --spa'
