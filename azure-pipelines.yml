@@ -12,7 +12,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '12.x'
   displayName: 'Install Node.js'
 
 - script: |
@@ -20,3 +20,13 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'abonnement-base(dc23999e-4ba1-4964-bd8c-ee9495c987d1)'
+    appType: 'webAppLinux'
+    WebAppName: 'apolo-web-dev'
+    deployToSlotOrASE: true
+    SlotName: 'production'
+    packageForLinux: '$(Pipeline.Workspace)/dist/ms-retail'
+    StartupCommand: 'pm2 serve /home/site/wwwroot --no-daemon --spa'
