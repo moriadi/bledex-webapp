@@ -28,5 +28,5 @@ steps:
     WebAppName: 'apolo-web-dev'
     deployToSlotOrASE: true
     SlotName: 'production'
-    packageForLinux: '$(Pipeline.Workspace)/dist/ms-retail'
+    packageForLinux: ./dist/ms-retail
     StartupCommand: 'pm2 serve /home/site/wwwroot --no-daemon --spa'
