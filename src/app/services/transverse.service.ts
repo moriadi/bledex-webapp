@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
 import { Depot } from '@app/models/depot';
-import { Quartier } from '@app/models/quartier';
 import { Fonction } from '@app/models/fonction';
 import { Fournisseur } from '@app/models/fournisseur';
 import { Agence } from '@app/models/agence';
@@ -18,14 +17,6 @@ export class TransverseService {
 
     depotUpdate(depot: Depot) {
         return this.http.put<boolean>(`${environment.apiUrl}/api/transverse/depot/${depot.id}`, depot)
-    }
-
-    quartierGetAll() {
-        return this.http.get<Quartier[]>(`${environment.apiUrl}/api/transverse/quartier`);
-    }
-
-    quartierGetById(id: number) {
-        return this.http.get<Quartier>(`${environment.apiUrl}/api/transverse/quartier/${id}`);
     }
 
     fonctionGetAll() {

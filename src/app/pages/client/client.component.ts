@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import 'devextreme/data/odata/store';
 import { SharedDataService } from '@app/services/shared-data.service';
 import { TransverseService } from '@app/services/transverse.service';
-import { Quartier } from '@app/models/quartier';
 import { ClientService } from '@app/services/client.service';
 import { Client } from '@app/models/client';
 

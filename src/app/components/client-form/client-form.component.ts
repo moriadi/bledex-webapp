@@ -2,7 +2,6 @@ import { Component, NgModule, ViewChild, Input } from '@angular/core';
 import { DxFormComponent } from 'devextreme-angular';
 import { SharedDataService } from '@app/services/shared-data.service';
 import { TransverseService } from '@app/services/transverse.service';
-import { Quartier } from '@app/models/quartier';
 import { Client } from '@app/models/client';
 import { ClientService } from '@app/services/client.service';
 
@@ -13,7 +12,6 @@ import { ClientService } from '@app/services/client.service';
 export class ClientFormComponent {
   @ViewChild("clientForm") form: DxFormComponent;
   @Input() client: Client;
-  public quartiers: Quartier[];
 
   buttonOptions: any = {
     text: "Register",
@@ -28,7 +26,6 @@ export class ClientFormComponent {
   constructor(private sharedDataService: SharedDataService,
       private clientService: ClientService,
       private transverseService: TransverseService) {
-        this.transverseService.quartierGetAll().subscribe(t => this.quartiers = t);
        }
 
   ngOnInit() {

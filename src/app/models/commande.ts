@@ -1,4 +1,3 @@
-import { Quartier } from './quartier';
 import { User } from './user';
 import { Fournisseur } from './fournisseur';
 

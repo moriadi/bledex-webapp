@@ -1,6 +1,3 @@
-import { User } from './user';
-import { Quartier } from './quartier';
-
 export class Client {
     id: number;
     raisonSociale: string;
