@@ -27,6 +27,10 @@ export const navigation_vendeur = [
           path: '/produit'
         },
         {
+          text: 'Produits par agence',
+          path: '/produit/byagence'
+        },
+        {
           text: 'Produits à Commander',
           path: '/produit/acommander'
         }

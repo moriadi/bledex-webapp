@@ -28,6 +28,9 @@ export class VenteComponent {
   canUpdateVente: boolean;
   selectedRows: number[] = [];
   @ViewChild("grid") grid: DxDataGridComponent;
+  errorVisible = false;
+  errorMessage = 'my message';
+  type = 'error';
 
   constructor(
     private sharedDataService: SharedDataService,
@@ -108,6 +111,13 @@ export class VenteComponent {
 
   public validerLivraison(livraison: Livraison) {
     livraison.venteId = this.currentVente.id;
+    if ((livraison.reduction /this.currentVente.total) > 0.10) {
+      this.errorMessage = "la réduction est supérieure au montant Maximum";
+      this.errorVisible = true;
+      this.loadIndicatorVisible = false;
+      return;
+    }
+
     this.venteService.venteLivrer(livraison).subscribe(t => {
       this.loadIndicatorVisible = false;
       this.refreshVenteList();

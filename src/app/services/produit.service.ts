@@ -27,6 +27,10 @@ export class ProduitService {
         return this.http.get<Produit[]>(`${environment.apiUrl}/api/produit/fournisseur/${id}`);
     }
 
+    getByAgence(id) {
+        return this.http.get<Produit[]>(`${environment.apiUrl}/api/produit/agence/${id}`);
+    }
+
     getById(id: number) {
         return this.http.get<Produit>(`${environment.apiUrl}/api/produit/${id}`);
     }

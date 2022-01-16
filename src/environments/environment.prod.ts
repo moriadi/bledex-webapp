@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://apolo-dev.azurewebsites.net'
+  apiUrl: 'http://178.170.103.123:5001'
 };

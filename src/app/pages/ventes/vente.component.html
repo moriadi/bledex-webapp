@@ -205,3 +205,10 @@
     </div>
 </dx-popup>
 
+<dx-toast [displayTime]="5000" [(visible)]="errorVisible" [type]="type" [message]="errorMessage">
+    <dxo-position
+        my="top"
+        at="top"
+        of="#grid">
+     </dxo-position>
+</dx-toast>

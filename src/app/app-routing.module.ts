@@ -44,6 +44,9 @@ import { VenteProduitComponent } from './pages/ventesproduits/venteproduits.comp
 import { ArchiveVenteFilterComponent } from './components/archive-vente-filter/archive-vente-filter.component';
 import { ArchiveVenteResultComponent } from './components/archive-vente-result/archive-vente-result.component';
 import { VenteConfirmComponent } from './components/vente-confirm/vente-confirm.component';
+import { ProduitByAgenceComponent } from './pages/produitsbyagence/produitsbyagence.component';
+import { ProduitByAgenceFilterComponent } from './components/produitsbyagence-filter/produitsbyagence-filter.component';
+import { ProduitByAgenceResultComponent } from './components/produitsbyagence-result/produitsbyagence-result.component';
 
 const routes: Routes = [
   {
@@ -70,6 +73,11 @@ const routes: Routes = [
   {
     path: 'produit',
     component: ProduitComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'produit/byagence',
+    component: ProduitByAgenceComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -206,7 +214,10 @@ const routes: Routes = [
     VenteProduitComponent,
     ArchiveVenteFilterComponent,
     ArchiveVenteResultComponent,
-    VenteConfirmComponent
+    VenteConfirmComponent,
+    ProduitByAgenceComponent,
+    ProduitByAgenceFilterComponent,
+    ProduitByAgenceResultComponent
   ]
 })
 export class AppRoutingModule { }

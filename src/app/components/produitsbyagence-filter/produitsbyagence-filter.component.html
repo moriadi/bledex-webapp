@@ -1,0 +1,29 @@
+<div class="row" style="margin-left: 10px; margin-right: 200px; margin-bottom: 10px;">
+    <dx-form id="form"
+        #produitByAgenceFilterForm
+        [formData]="selectedAgence"
+        [readOnly]="false"
+        [showColonAfterLabel]="true"
+        [showValidationSummary]="true"
+        validationGroup="customerData">
+        <dxi-item itemType="group" caption="" [colCount]="3">
+           
+            <dxi-item dataField="id"
+                editorType="dxSelectBox"
+                [disabled]='disableAgence'
+                [label]="{text: 'Agences'}"
+                [editorOptions]="{ dataSource: agences, 
+                                valueExpr:'id',  
+                                displayExpr:'libelle',  
+                                value: selectedAgence.id
+                                }">
+            </dxi-item>
+        </dxi-item>
+
+        <dxi-item 
+            itemType="button"
+            horizontalAlignment="left"
+            [buttonOptions]="buttonOptions">
+        </dxi-item>
+    </dx-form>
+</div>

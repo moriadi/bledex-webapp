@@ -31,6 +31,10 @@ export const navigation = [
         path: '/produit'
       },
       {
+        text: 'Produits par agence',
+        path: '/produit/byagence'
+      },
+      {
         text: 'Commandes',
         path: '/commande'
       },

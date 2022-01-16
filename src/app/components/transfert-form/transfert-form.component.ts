@@ -16,6 +16,10 @@ export class TransfertFormComponent {
   @Input() transfert: Transfert;
   agences: Agence[];
 
+  errorVisible = false;
+  errorMessage = 'my message';
+  type = 'error';
+
   buttonOptions: any = {
     text: "Register",
     type: "success",
@@ -38,6 +42,12 @@ export class TransfertFormComponent {
   }
 
   onValidationClick(args) {
+        if(this.transfert.agenceSource.id == this.transfert.agenceCible.id){
+            this.errorMessage = "les agences source et cible doivent être différentes";
+            this.errorVisible = true;
+            return;
+        }
+
         if (this.transfert.id > 0){
             this.transfertService.update(this.transfert).subscribe(t => {
                 this.sharedDataService.changeMessage('CLOSED_TRANSFERT_FORM');

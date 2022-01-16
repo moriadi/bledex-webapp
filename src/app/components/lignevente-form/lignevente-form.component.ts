@@ -19,6 +19,11 @@ export class LigneVenteFormComponent {
   @Input() ligneVente: LigneVente;
   @Input() vente: Vente;
   produits: Produit[];
+
+  errorVisible = false;
+  errorMessage = 'my message';
+  type = 'error';
+  
   buttonOptions: any = {
     text: "Register",
     type: "success",
@@ -49,7 +54,12 @@ export class LigneVenteFormComponent {
   ajouterLigneProduit_V1() {
     this.venteService.ligneventeCreate(this.ligneVente).subscribe(t => {
         this.sharedDataService.changeMessage('CLOSED_LIGNEVENTE_FORM');
-    });   
+    },
+      (err) => {
+          this.errorMessage = err.error;
+          this.errorVisible = true;
+      }
+    );   
   }
 
   fournisseurValueChanged(e) {
