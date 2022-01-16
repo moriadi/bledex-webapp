@@ -26,9 +26,9 @@ steps:
     appType: 'webAppLinux'
     DeploymentType: webDeploy
     azureSubscription: 'abonnement-base(dc23999e-4ba1-4964-bd8c-ee9495c987d1)'
-    WebAppName: 'apolo-web-dev'
+    WebAppName: 'apolo-nova'
     #deployToSlotOrASE: true
-    ResourceGroupName: 'rg-bledex-dev'
+    ResourceGroupName: 'nova-sarl'
     #SlotName: 'production'
     packageForLinux: ./dist/ms-retail
     enableCustomDeployment: true
