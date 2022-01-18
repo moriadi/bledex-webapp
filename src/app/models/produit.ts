@@ -12,8 +12,10 @@ export class Produit {
     prixVente: number;
     stockTotal: number;
     agenceProduits: AgenceProduit[];
+    codeLibelle: string;
     
     constructor(){
         this.fournisseur = new Fournisseur();
     }
+
 }
