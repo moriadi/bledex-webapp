@@ -10,7 +10,7 @@ import { SharedDataService } from '@app/services/shared-data.service';
 export class VenteConfirmComponent {
   @Input() message: string;
   hasReduction: boolean = false;
-  amount: number = 0;
+  amount: number = 0; 
   constructor(private sharedDataService: SharedDataService) {
     }
 
@@ -18,9 +18,9 @@ export class VenteConfirmComponent {
 
   public ouiClick(){
     let livraison: Livraison = new Livraison(0);
-    if (this.hasReduction){
-        livraison.reduction = this.amount;
-    }
+    // if (this.hasReduction){
+    //     livraison.montant = this.amount;
+    // }
     this.sharedDataService.pushLivraison(livraison);
   }
 

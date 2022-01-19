@@ -20,7 +20,7 @@
                     message="Le produit est obligatoire">
                 </dxi-validation-rule>
             </dxi-item>
-
+ 
             <dxi-item dataField="quantite" editorType="dxNumberBox" [label]="{text: 'Quantite'}" >
                 <dxi-validation-rule 
                     type="required"
@@ -29,6 +29,16 @@
             </dxi-item>
 
         </dxi-item>
+
+        <dxi-item itemType="group" caption="" [colCount]="2">
+            <dxi-item dataField="changePrixUnitaire" editorType="dxCheckBox" [label]="{text: 'Modifier Prix ?'}" >
+            </dxi-item>
+
+            <dxi-item *ngIf="ligneVente.changePrixUnitaire" dataField="prixUnitaire" editorType="dxNumberBox" [label]="{text: 'Nouveau  Prix'}" >
+            </dxi-item>
+
+        </dxi-item>
+
 
         <dxi-item 
             itemType="button"

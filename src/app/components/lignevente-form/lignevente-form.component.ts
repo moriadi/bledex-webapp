@@ -52,14 +52,24 @@ export class LigneVenteFormComponent {
   }
 
   ajouterLigneProduit_V1() {
-    this.venteService.ligneventeCreate(this.ligneVente).subscribe(t => {
-        this.sharedDataService.changeMessage('CLOSED_LIGNEVENTE_FORM');
-    },
-      (err) => {
-          this.errorMessage = err.error;
+    console.log(this.ligneVente);
+    if(this.ligneVente.changePrixUnitaire && this.ligneVente.prixUnitaire == 0){  
+      this.errorMessage = "veuillez renseigner le nouveau prix du produit";
+      this.errorVisible = true;
+      return;
+    } else {
+        if (this.ligneVente.quantite == 0) {
+          this.errorMessage = "veuillez renseigner la quantité";
           this.errorVisible = true;
-      }
-    );   
+          return;
+        } else
+        {
+            this.venteService.ligneventeCreate(this.ligneVente).subscribe(t => {
+                this.sharedDataService.changeMessage('CLOSED_LIGNEVENTE_FORM');
+            }, (err) => { this.errorMessage = err.error;  this.errorVisible = true; }); 
+        }
+        
+    }  
   }
 
   fournisseurValueChanged(e) {

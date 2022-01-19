@@ -111,17 +111,20 @@ export class VenteComponent {
 
   public validerLivraison(livraison: Livraison) {
     livraison.venteId = this.currentVente.id;
-    if ((livraison.reduction /this.currentVente.total) > 0.10) {
-      this.errorMessage = "la réduction est supérieure au montant Maximum";
-      this.errorVisible = true;
-      this.loadIndicatorVisible = false;
-      return;
-    }
+    // if (livraison.montant != this.currentVente.total && this.currentVente.total > livraison.montant){
+    //    if (((this.currentVente.total - livraison.reduction)/this.currentVente.total) > 0.10){
+    //       this.errorMessage = "la réduction est supérieure au montant Maximum";
+    //       this.errorVisible = true;
+    //       this.loadIndicatorVisible = false;
+    //       return;
+    //    }
+    // }
 
     this.venteService.venteLivrer(livraison).subscribe(t => {
       this.loadIndicatorVisible = false;
       this.refreshVenteList();
     });
+    
   }
 
   public validerVenteDialog(vente: Vente) {

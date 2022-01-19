@@ -12,9 +12,12 @@ export class LigneVente {
     produit: Produit;
     cump: number;
     prixUnitaire: number;
+    changePrixUnitaire: boolean;
 
     public constructor(){
         this.vente = new Vente();
         this.produit = new Produit();
+        this.prixUnitaire = 0;
+        this.quantite = 0;
     }
 }
