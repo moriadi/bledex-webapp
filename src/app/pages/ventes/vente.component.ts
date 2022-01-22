@@ -54,7 +54,7 @@ export class VenteComponent {
         } else if (t == 'CLOSED_LIGNEVENTE_FORM') {
           this.showLigneVenteForm = false;
           this.currentLigneVente = null;
-          this.openLigneVenteForm(this.currentVente.id);
+          this.openLigneVenteForm(this.currentVente);
           this.refreshVenteList();
         } else if (t == 'REFRESH_VENTE_LIST'){
           this.refreshVenteList();
@@ -98,15 +98,13 @@ export class VenteComponent {
     this.showFormModifyVenteDate = true;
   }
 
-  public openLigneVenteForm(id) {
-    this.venteService.venteGetById(id).subscribe(t => {
+  public openLigneVenteForm(vente: Vente) {
+      this.currentVente = vente;
       this.currentLigneVente = new LigneVente();
-      this.currentLigneVente.vente = t;
-      this.currentLigneVente.venteId = t.id;
-      this.currentVente = t;
+      this.currentLigneVente.vente = vente;
+      this.currentLigneVente.venteId = vente.id;
       this.showLigneVenteForm = true;
       this.sharedDataService.changeMessage("LIGNE_VENTE_REFRESH_PRODUITS")
-    });
   } 
 
   public validerLivraison(livraison: Livraison) {

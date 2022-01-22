@@ -48,10 +48,12 @@ export class LigneCommandeFormComponent {
   onValidationClick(args) {
         if (this.ligneCommande.id > 0){
             this.commandeService.ligneCommandeUpdate(this.ligneCommande).subscribe(t => {
+                this.ligneCommande = new LigneCommande();
                 this.sharedDataService.changeMessage('CLOSED_LIGNECOMMANDE_FORM');
             });
         } else {
             this.commandeService.ligneCommandeCreate(this.ligneCommande).subscribe(t => {
+                this.ligneCommande = new LigneCommande();
                 this.sharedDataService.changeMessage('CLOSED_LIGNECOMMANDE_FORM');
             });
         }

@@ -76,9 +76,9 @@
         cellTemplate="cellTemplate">
     </dxi-column>
         
-    <div *dxTemplate="let data of 'cellTemplate'">
-        <i *ngIf="!data.data.estValide" (click)="openForm(data.data.id)" class="dx-icon dx-icon-edit"></i> <span *ngIf="!data.data.estValide">Modify </span>
-        <i *ngIf="!data.data.estValide" (click)="openLigneCommandeForm(data.data.id)" class="dx-icon dx-icon-add"></i> <span *ngIf="!data.data.estValide"> New Produit </span>
+    <div *dxTemplate="let commande of 'cellTemplate'">
+        <i *ngIf="!commande.data.estValide" (click)="openForm(commande.data.id)" class="dx-icon dx-icon-edit"></i> <span *ngIf="!commande.data.estValide">Modify </span>
+        <i *ngIf="!commande.data.estValide" (click)="openLigneCommandeForm(commande.data)" class="dx-icon dx-icon-add"></i> <span *ngIf="!commande.data.estValide"> New Produit </span>
     </div>
 
     <div *dxTemplate="let commande of 'detail'">

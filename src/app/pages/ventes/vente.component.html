@@ -112,12 +112,12 @@
         cellTemplate="cellTemplate">
     </dxi-column>
         
-    <div *dxTemplate="let data of 'cellTemplate'">
+    <div *dxTemplate="let vente of 'cellTemplate'">
         <dx-button
-               *ngIf="data.data.estModifiable"
+               *ngIf="vente.data.estModifiable"
                 icon="edit"
                 type="danger"
-                (onClick)="openForm(data.data.id)">
+                (onClick)="openForm(vente.data.id)">
                 <div *dxTemplate="let data of 'content'">
                     <i class="dx-icon dx-icon-edit"></i> Modifier
                 </div>
@@ -125,19 +125,19 @@
 
         <dx-button
                style="margin-left: 2px; margin-right: 2px;"
-               *ngIf="data.data.estModifiable"
+               *ngIf="vente.data.estModifiable"
                 icon="add"
                 type="default"
-                (onClick)="openLigneVenteForm(data.data.id)">
+                (onClick)="openLigneVenteForm(vente.data)">
                 <div *dxTemplate="let data of 'content'">
                     <i class="dx-icon dx-icon-add"></i> Article
                 </div>
          </dx-button>
         <dx-button
-               *ngIf="data.data.estModifiable"
+               *ngIf="vente.data.estModifiable"
                 icon="check"
                 type="success"
-                (onClick)="validerVenteDialog(data.data)">
+                (onClick)="validerVenteDialog(vente.data)">
                 <div *dxTemplate="let data of 'content'">
                     <dx-load-indicator class='button-indicator'
                         [visible]="loadIndicatorVisible">
@@ -145,7 +145,7 @@
                     <i class="dx-icon dx-icon-check"></i> Valider
                 </div>
          </dx-button>
-         <i *ngIf="data.data.estLivre" (click)="printInvoice(data.data.id)" class="dx-icon dx-icon-print"></i> <span *ngIf="data.data.estLivre"> Facture </span>
+         <i *ngIf="vente.data.estLivre" (click)="printInvoice(vente.data.id)" class="dx-icon dx-icon-print"></i> <span *ngIf="vente.data.estLivre"> Facture </span>
     </div>
 
     <div *dxTemplate="let vente of 'detail'">

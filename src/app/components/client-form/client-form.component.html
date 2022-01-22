@@ -14,7 +14,11 @@
                 </dxi-validation-rule>
             </dxi-item>
 
-            <dxi-item dataField="nomContact">
+            <dxi-item dataField="nomContact" [label]="{text: 'Nom Contact'}">
+                <dxi-validation-rule 
+                    type="required"
+                    message="le contact est obligatoire">
+                </dxi-validation-rule>
             </dxi-item>
         </dxi-item>
 

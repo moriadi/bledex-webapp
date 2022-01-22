@@ -37,6 +37,7 @@ export class CommandeComponent {
          this.popupVisible = false;
         } else if (t == 'CLOSED_LIGNECOMMANDE_FORM') {
           this.showLigneCommandeForm = false;
+          this.openLigneCommandeForm(this.currentCommande);
         }
         this.refreshCommandeList();
     });
@@ -58,12 +59,11 @@ export class CommandeComponent {
     }   
   }
 
-  public openLigneCommandeForm(id) {
-    this.commandeService.commandeGetById(id).subscribe(t => {
-      this.currentLigneCommande.commande = t;
-      this.currentLigneCommande.commandeId = t.id;
+  public openLigneCommandeForm(commande: Commande) {
+      this.currentCommande = commande;
+      this.currentLigneCommande.commande = commande;
+      this.currentLigneCommande.commandeId = commande.id;
       this.showLigneCommandeForm = true;
       this.sharedDataService.changeMessage("LIGNE_COMMANDE_REFRESH_PRODUITS")
-    });
   }
 }

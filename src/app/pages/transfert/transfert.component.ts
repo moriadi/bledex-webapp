@@ -36,6 +36,7 @@ export class TransfertComponent {
          this.popupVisible = false;
         } else if (t == 'CLOSED_LIGNETRANSFERT_FORM') {
           this.showLigneTransfertForm = false;
+          this.openLigneTransfertForm(this.currentTransfert);
         }
         this.refreshTransfertList();
     });
@@ -58,6 +59,7 @@ export class TransfertComponent {
   }
 
   public openLigneTransfertForm(data: Transfert) {
+      this.currentTransfert = data;
       this.currentLigneTransfert.transfert = data;
       this.showLigneTransfertForm = true;
       this.sharedDataService.changeMessage("LIGNE_TRANSFERT_REFRESH_PRODUITS");
