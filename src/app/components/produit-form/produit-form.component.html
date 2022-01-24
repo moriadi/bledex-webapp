@@ -59,3 +59,11 @@
         </dxi-item>
     </dx-form>
 </div>
+
+<dx-toast [displayTime]="5000" [(visible)]="errorVisible" [type]="type" [message]="errorMessage">
+    <dxo-position
+        my="top"
+        at="top"
+        of="#lignetransfertForm">
+     </dxo-position>
+</dx-toast>

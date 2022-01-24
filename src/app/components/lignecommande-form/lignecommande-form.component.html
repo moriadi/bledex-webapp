@@ -27,6 +27,11 @@
                     type="required"
                     message="La quantite est obligatoire">
                 </dxi-validation-rule>
+                <dxi-validation-rule
+                    type="range"
+                    [min]="1"
+                    message="La quantite doit être supérieure à 0"
+                ></dxi-validation-rule>
             </dxi-item>
 
             <dxi-item dataField="prixUnitaire" editorType="dxNumberBox" [label]="{text: 'Prix unitaire'}" >
@@ -34,6 +39,12 @@
                     type="required"
                     message="Le le prix est obligatoire">
                  </dxi-validation-rule>
+
+                 <dxi-validation-rule
+                    type="range"
+                    [min]="1"
+                    message="Le prix unitaire doit être supérieur à 0"
+                ></dxi-validation-rule>
             </dxi-item>
         </dxi-item>
 

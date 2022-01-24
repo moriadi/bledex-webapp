@@ -49,7 +49,7 @@ export class LigneTransfertFormComponent {
 
   onValidationClick(args) {
         this.transfertService.ligneTransfertCreate(this.ligneTransfert).subscribe(t => {
-            this.ligneTransfert = new LigneTransfert();
+            this.ligneTransfert.quantite = 0;
             this.sharedDataService.changeMessage('CLOSED_LIGNETRANSFERT_FORM');
         }
         ,

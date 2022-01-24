@@ -16,6 +16,10 @@ export class ProduitFormComponent {
   @Input() produit: Produit;
   fournisseurs: Fournisseur[];
 
+  errorVisible = false;
+  errorMessage = 'my message';
+  type = 'error';
+
   buttonOptions: any = {
     text: "Register",
     type: "success",
@@ -45,7 +49,8 @@ export class ProduitFormComponent {
         } else {
             this.produitService.create(this.produit).subscribe(t => {
                 this.sharedDataService.changeMessage('CLOSED_PRODUIT_FORM');
-            });
+              },(err) => { this.errorMessage = err.error; this.errorVisible = true;}
+            );
         }
   }
 }

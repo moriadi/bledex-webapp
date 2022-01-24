@@ -26,6 +26,12 @@
                     type="required"
                     message="La quantite est obligatoire">
                 </dxi-validation-rule>
+
+                <dxi-validation-rule
+                    type="range"
+                    [min]="1"
+                    message="La quantite doit être supérieure à 0"
+                ></dxi-validation-rule>
             </dxi-item>
 
         </dxi-item>

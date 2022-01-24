@@ -46,16 +46,10 @@ export class LigneCommandeFormComponent {
   }
 
   onValidationClick(args) {
-        if (this.ligneCommande.id > 0){
-            this.commandeService.ligneCommandeUpdate(this.ligneCommande).subscribe(t => {
-                this.ligneCommande = new LigneCommande();
-                this.sharedDataService.changeMessage('CLOSED_LIGNECOMMANDE_FORM');
-            });
-        } else {
-            this.commandeService.ligneCommandeCreate(this.ligneCommande).subscribe(t => {
-                this.ligneCommande = new LigneCommande();
-                this.sharedDataService.changeMessage('CLOSED_LIGNECOMMANDE_FORM');
-            });
-        }
+    this.commandeService.ligneCommandeCreate(this.ligneCommande).subscribe(t => {
+        this.ligneCommande.prixUnitaire = 0;
+        this.ligneCommande.quantite = 0;
+        this.sharedDataService.changeMessage('CLOSED_LIGNECOMMANDE_FORM');
+    });
   }
 }

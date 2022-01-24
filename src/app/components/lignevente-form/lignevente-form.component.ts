@@ -65,7 +65,7 @@ export class LigneVenteFormComponent {
         } else
         {
             this.venteService.ligneventeCreate(this.ligneVente).subscribe(t => {
-                this.ligneVente = new LigneVente();
+                this.ligneVente.quantite = 0;
                 this.sharedDataService.changeMessage('CLOSED_LIGNEVENTE_FORM');
             }, (err) => { this.errorMessage = err.error;  this.errorVisible = true; }); 
         }
